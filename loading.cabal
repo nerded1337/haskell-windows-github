@@ -1,0 +1,69 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: f442420644b2ad035d19af5baf98dded3e24f7af3ff2500d3d3dfe823b4b430e
+
+name:           loading
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/loading#readme>
+homepage:       https://github.com/githubuser/loading#readme
+bug-reports:    https://github.com/githubuser/loading/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2020 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/loading
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_loading
+  hs-source-dirs:
+      src
+  ghc-options: -pgmccl
+  include-dirs:
+      src
+  c-sources:
+      src/haskell.cpp
+  extra-libraries:
+      stdc++
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable loading-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_loading
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , loading
+  default-language: Haskell2010
+
+test-suite loading-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_loading
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , loading
+  default-language: Haskell2010
