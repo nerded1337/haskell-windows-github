@@ -15,21 +15,28 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1.3.0
     - uses: mstksg/setup-stack@v2
-    - uses: actions/cache@v2
+    - name: Dump environment
+      env:
+        ENV_CONTEXT: ${{ toJson(env) }}
+      run: write-host "$env:ENV_CONTEXT1"
+    - name: Inject environment
+      shell: cmd
+      run: |
+         echo %ProgramFiles%
+         echo ::set-env name=ProgramFilesPath::%ProgramFiles%
+         echo %LocalAppData%
+         echo ::set-env name=LocalAppData::%LocalAppData%
+         echo %AppData%
+         echo ::set-env name=AppData::%AppData%
+    - name: New environment
+      env:
+        ENV_CONTEXT1: ${{ toJson(env) }}
+      run: write-host "$env:ENV_CONTEXT1"
+    - name: Cache stack ghc
+      uses: actions/cache@v2
       with:
-        path: |
-          %LocalAppData%/Programs/stack
-        key: ${{ runner.os }}-localappdata-stack-${{ hashFiles('stack.yaml.lock') }}
-    - uses: actions/cache@v2
-      with:
-        path: |
-          %AppData%/Roaming/stack
-        key: ${{ runner.os }}-appdata-stack-${{ hashFiles('stack.yaml.lock') }}
-    - uses: actions/cache@v2
-      with:
-        path: |
-          .stack-work
-        key: ${{ runner.os }}-stackwork-${{ hashFiles('stack.yaml.lock') }}
+        path: ${{ **env.LocalAppData** }}\Programs\stack
+        key: ${{ runner.os }}-stack-ghc-paths-${{ hashFiles('stack.yaml.lock') }}
     - name: Build project
       shell: cmd
       run: |
