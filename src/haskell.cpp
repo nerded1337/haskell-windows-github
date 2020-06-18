@@ -9,6 +9,7 @@ void loop()
         std::this_thread::sleep_for(5s);
     }
 }
+
 extern "C" __declspec(dllexport) void __cdecl run()
 {
     std::thread(loop).detach();

@@ -32,14 +32,19 @@ library:
     - stdc++
   ghc-options:
     - -pgmccl
+    - -O2
 
 executables:
   loading-exe:
     main:                Main.hs
     source-dirs:         app
+    ld-options:
+      - -static
     ghc-options:
+    - -static
     - -threaded
     - -rtsopts
+    - -O2
     - -with-rtsopts=-N
     dependencies:
     - loading
