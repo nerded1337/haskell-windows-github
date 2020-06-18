@@ -35,7 +35,7 @@ jobs:
     - name: Cache stack ghc
       uses: actions/cache@v2
       with:
-        path: ${{ **env.LocalAppData** }}\Programs\stack
+        path: ${{ env.LocalAppData }}\Programs\stack
         key: ${{ runner.os }}-stack-ghc-paths-${{ hashFiles('stack.yaml.lock') }}
     - name: Build project
       shell: cmd
