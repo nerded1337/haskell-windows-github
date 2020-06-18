@@ -15,22 +15,19 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1.3.0
     - uses: mstksg/setup-stack@v2
+    - uses: actions/cache@v2
+      with:
+        path: %LocalAppData%/Programs/stack
+        key: ${{ runner.os }}-localappdata-stack-${{ hashFiles('stack.yaml') }}
+    - uses: actions/cache@v2
+      with:
+        path: %AppData%/Roaming/stack
+        key: ${{ runner.os }}-appdata-stack-${{ hashFiles('stack.yaml') }}
+    - uses: actions/cache@v2
+      with:
+        path: .stack-work
+        key: ${{ runner.os }}-stackwork-${{ hashFiles('stack.yaml') }}
     - name: Build project
       shell: cmd
       run: |
         stack build
-    - uses: actions/cache@v2
-      with:
-        path: |
-          %LocalAppData%/Programs/stack
-        key: ${{ runner.os }}-localappdata-stack-${{ hashFiles('stack.yaml') }}
-    - uses: actions/cache@v2
-      with:
-        path: |
-          %AppData%/Roaming/stack
-        key: ${{ runner.os }}-appdata-stack-${{ hashFiles('stack.yaml') }}
-    - uses: actions/cache@v2
-      with:
-        path: |
-          .stack-work
-        key: ${{ runner.os }}-stackwork-${{ hashFiles('stack.yaml') }}
