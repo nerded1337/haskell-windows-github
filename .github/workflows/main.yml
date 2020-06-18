@@ -19,17 +19,17 @@ jobs:
       with:
         path: |
           %LocalAppData%/Programs/stack
-        key: ${{ runner.os }}-localappdata-stack-${{ hashFiles('stack.yaml') }}
+        key: ${{ runner.os }}-localappdata-stack-${{ hashFiles('stack.yaml.lock') }}
     - uses: actions/cache@v2
       with:
         path: |
           %AppData%/Roaming/stack
-        key: ${{ runner.os }}-appdata-stack-${{ hashFiles('stack.yaml') }}
+        key: ${{ runner.os }}-appdata-stack-${{ hashFiles('stack.yaml.lock') }}
     - uses: actions/cache@v2
       with:
         path: |
           .stack-work
-        key: ${{ runner.os }}-stackwork-${{ hashFiles('stack.yaml') }}
+        key: ${{ runner.os }}-stackwork-${{ hashFiles('stack.yaml.lock') }}
     - name: Build project
       shell: cmd
       run: |
