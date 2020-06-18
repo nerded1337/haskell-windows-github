@@ -17,11 +17,13 @@ jobs:
     - uses: mstksg/setup-stack@v2
     - uses: actions/cache@v2
       with:
-        path: %LocalAppData%/Programs/stack
+        path: |
+          %LocalAppData%/Programs/stack
         key: ${{ runner.os }}-localappdata-stack-${{ hashFiles('stack.yaml') }}
     - uses: actions/cache@v2
       with:
-        path: %AppData%/Roaming/stack
+        path: |
+          %AppData%/Roaming/stack
         key: ${{ runner.os }}-appdata-stack-${{ hashFiles('stack.yaml') }}
     - uses: actions/cache@v2
       with:
